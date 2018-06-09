@@ -158,8 +158,6 @@ var eosVoter = class {
             broadcast: true,
             debug: true, // API and transactions
             sign: true
-            //   keyProvider: privateKey
-            //   keyProvider: '5KUmsEfv4Ww3cXF7JLZQvpiGNURJmYdH6ccukojhfmNMwuFU8bo'
         };
         if (network.secured) {
             config.httpsEndpoint = 'https://' + network.host + ':' + network.port;
