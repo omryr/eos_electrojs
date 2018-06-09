@@ -70,8 +70,9 @@ var eosVoter = class {
 
         document.getElementById("vote_button").disabled = true;
         this.working = true;
-        console.log('accountName accountName accountName ', accountName)
+        console.log('this.getSelectedBPs() ', this.getSelectedBPs())
         return this.eosPrivate.contract('eosio').then(contract => {
+            // return contract.voteproducer(accountName, "", this.getSelectedBPs());
             return contract.voteproducer(accountName, "", this.getSelectedBPs());
         }).then(res => {
             document.getElementById("vote_button").disabled = false;
