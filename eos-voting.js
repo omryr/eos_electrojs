@@ -5,11 +5,13 @@ const networks = [
         name: "Main Net",
         host: "api.main.alohaeos.com",
         port: 443,
+        chainId: "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
         secured: true
     },
     {
         name: "Jungle Testnet",
         host: "dolphin.eosblocksmith.io",
+        chainId: "038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca",
         port: 8888
     }
 ];
@@ -50,13 +52,11 @@ var eosVoter = class {
     vote(errorHandler, successHandler) {
         var eosOptions = {};
         var table;
-        console.log('document.getElementById("eos_private_key").value !!! ', document.getElementById("eos_private_key").value)
+        // console.log('document.getElementById("eos_private_key").value !!! ', document.getElementById("eos_private_key").value)
         var config = {
-            chainId: null, // 32 byte (64 char) hex string          
-            expireInSeconds: 60,
-            broadcast: true,
-            debug: true, // API and transactions
-            sign: true,
+            chainId: network.chainId, // 32 byte (64 char) hex string          
+            expireInSeconds: 120,
+            // sign: true,
             keyProvider: document.getElementById("eos_private_key").value
         };
         if (network.secured) {
@@ -72,8 +72,8 @@ var eosVoter = class {
         this.working = true;
         console.log('this.getSelectedBPs() ', this.getSelectedBPs())
         return this.eosPrivate.contract('eosio').then(contract => {
-            // return contract.voteproducer(accountName, "", this.getSelectedBPs());
-            return contract.voteproducer(accountName, "", this.getSelectedBPs());
+            // return this.eosPrivate.voteproducer(accountName, "", this.getSelectedBPs());
+            return contract.voteproducer({voter:accountName, proxy:"", producers:this.getSelectedBPs()}, {authorization : accountName});
         }).then(res => {
             document.getElementById("vote_button").disabled = false;
             this.voteSuccess(res);
