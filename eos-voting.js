@@ -88,33 +88,16 @@ var eosVoter = class {
 
         this.eosPrivate = new Eos.Testnet(config);
 
-        // console.log(this.network);
         document.getElementById("vote_button").disabled = true;
-        this.verifyScatter();
         this.working = true;
-        // return this.eos.transaction(tr => {
-        //	tr.delegatebw(accountName,accountName,"0.5 SYS","0.5 SYS",0);
-        // var accountName = document.getElementById("cleos_name").value;
         console.log('accountName accountName accountName ', accountName)
         return this.eosPrivate.contract('eosio').then(contract => {
             return contract.voteproducer(accountName, "", this.getSelectedBPs());
-
-            // return tr.voteproducer(accountName,"",this.getSelectedBPs());
-
-            //return this.eos.contract('eosio').then(contract => {
-            // console.log("contract",contract);        
-            // return contract.delegatebw(identity.name,identity.name,net,cpu,"0.0 EOS").then(result=>{
-            //return contract.voteproducer(identity.name,"",this.getSelectedBPs());
-            // });
-            // 
-            //});  
         }).then(res => {
-            // console.log('SUCCESS')
             document.getElementById("vote_button").disabled = false;
             this.voteSuccess(res);
             this.working = false;
         }).catch(error => {
-            // console.log('FAIL ', error)
             document.getElementById("vote_button").disabled = false;
             this.voteError(error);
             this.working = true;
@@ -147,32 +130,12 @@ var eosVoter = class {
     }
 
     updatePrivateKey() {
-        // refreshBPs()
         privateKey = document.getElementById("eos_private_key").value;
-        // var privateKeyString = document.getElementById("eos_private_key").value;
-        // var accName
-        // console.log('this.eosPublic ', voter.eosPublic);
-        // var accName;
         voter.eosPublic.getKeyAccounts({ "public_key": Eos.modules.ecc.privateToPublic(privateKey) }).then(identity => {
-            // console.log('identity!!!!', identity.account_names[0])
-            // accName = identity.account_names[0];
             accountName = identity.account_names[0];
             document.getElementById("cleos_name").innerHTML = accountName;
             document.getElementById("cleos_account2").innerHTML = accountName;
         });
-
-        // document.getElementById("cleos_account2").innerHTML = Eos.modules.ecc.privateToPublic(privateKeyString);
-        // document.getElementById("cleos_account2").innerHTML = this.eosPublic.getKeyAccounts({"public_key":  Eos.modules.ecc.privateToPublic(privateKeyString)}).account_names[0];
-        // document.getElementById("cleos_account2").innerHTML = Eos.modules.ecc.privateToPublic(privateKeyString);
-        // var accNameByPrivateKey = this.eosPublic.getKeyAccounts({"public_key":  Eos.modules.ecc.privateToPublic(privateKeyString)}).account_names[0];
-        // document.getElementById("cleos_account2").innerHTML = privateKeyString;
-        // privateKey = document.getElementById("eos_private_key").value;
-        // transactionConfig.keyProvider = privateKey;
-
-        // var accName = Eos.modules.ecc.getKeyAccounts.account_names[0] || "";
-        // document.getElementById("cleos_account").innerHTML = accNameByPrivateKey;
-        //   document.getElementById("cleos_account").innerHTML = document.getElementById("cleos_name").value;
-        //   document.getElementById("cleos_account2").innerHTML = document.getElementById("cleos_name").value;
     }
 
     bpClick() {
@@ -231,11 +194,6 @@ var eosVoter = class {
             this.buildTable(res);
         });
 
-    }
-
-    verifyScatter() {
-        // this.scatter = window.scatter;
-        // this.scatter.requireVersion(3.0);
     }
 
     buildTable(res) {
@@ -336,25 +294,16 @@ var eosVoter = class {
         }
     }
     load() {
-        this.verifyScatter();
-        return scatter.suggestNetwork(this.network).then((selectedNetwork) => {
-            // console.log("selectedNetwork", selectedNetwork);
-            const requiredFields = { accounts: [{ blockchain: 'eos', host: network.host, port: network.port }] };
-            //  this.eos = this.scatter.eos( this.network, Eos.Testnet, {}, network.secured ? 'https' : undefined  );
-            // this.eosPublic = new Eos.Testnet(config);
-            scatter.authenticate().then(() => {
-                return this.eosPublic.getKeyAccounts({ "public_key": Eos.modules.ecc.privateToPublic }).then(identity => {
-                    // return this.eosPublic.getKeyAccounts({"public_key":"EOS7sNWH1qzycS6UYHx7rphWEEKarBTeCdrkvFsx6ycqQL8agRab3"}).then(identity => {
-                    // return scatter.getIdentity(requiredFields).then(identity => {
-                    // console.log("identity", identity);
-                    if (identity.accounts.length === 0) return
-                    var accountName = identity.accounts[0].name;
+        const requiredFields = { accounts: [{ blockchain: 'eos', host: network.host, port: network.port }] };
+        return this.eosPublic.getKeyAccounts({ "public_key": Eos.modules.ecc.privateToPublic }).then(identity => {
 
-                    document.getElementById("cleos_name").value = accountName;
-                    this.updateAccountName();
-                });
-            });
+            if (identity.accounts.length === 0) return
+            var accountName = identity.accounts[0].name;
+
+            document.getElementById("cleos_name").value = accountName;
+            this.updateAccountName();
         });
+
     }
 }
 
