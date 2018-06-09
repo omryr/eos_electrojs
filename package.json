@@ -5,9 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-      "pack": "electron-builder --dir -mwl",
-      "dist": "electron-builder -wl",
-      "dist-mac": "electron-builder -m"
+      "pack": "electron-builder --dir",
+      "dist": "electron-builder"
   },
   "keywords": [
   ],
@@ -16,7 +15,11 @@
 
     "win":{
       "target": "portable"
-    }
+    },
+    "files": [
+     "**/*",
+      "!node_modules/**"
+    ]
   },
   "author": "GitHub",
   "license": "CC0-1.0",
