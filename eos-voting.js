@@ -3,10 +3,10 @@ let privateKey = "";
 const networks = [
     {
         name: "Main Net",
-        host: "api.main.alohaeos.com",
-        port: 443,
+        host: "node2.liquideos.com",
+        port: 8888,
         chainId: "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
-        secured: true
+        secured: false
     },
     {
         name: "Jungle Testnet",
@@ -15,7 +15,7 @@ const networks = [
         port: 8888
     }
 ];
-var defaultIndex = 1;
+var defaultIndex = 0;
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");

@@ -5,21 +5,26 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . voter --platform=windows --all --overwrite"
+      "pack": "electron-builder --dir -mwl",
+      "dist": "electron-builder -wl",
+      "dist-mac": "electron-builder -m"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
   ],
+  "build": {    
+    "appId": "com.liquideos.vote",    
+
+    "win":{
+      "target": "portable"
+    }
+  },
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "electron-builder": "^20.15.1",
+    "electron-packager": "^12.1.0",
     "electron": "^2.0.0"
   },
   "dependencies": {
-    "electron-packager": "^12.1.0"
   }
 }
