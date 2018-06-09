@@ -106,8 +106,6 @@ var eosVoter = class {
     }
 
     updateAccountName() {
-        document.getElementById("cleos_account").innerHTML = document.getElementById("cleos_name").value;
-        document.getElementById("cleos_account2").innerHTML = document.getElementById("cleos_name").value;
     }
 
     updatePrivateKey() {
@@ -121,7 +119,6 @@ var eosVoter = class {
 
     bpClick() {
         var bps = voter.getSelectedBPs();
-        document.getElementById("cleos_bps").innerHTML = bps.join(" ");
     }
 
     voteSuccess(res) {

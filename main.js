@@ -5,10 +5,13 @@ const {app, BrowserWindow} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow,
     loadingScreen,
-    windowParams = {
+    windowParams = {        
         width: 1000,
         height: 700,
-        show: false
+        show: false,
+        webPreferences: {
+          devTools: false
+        }
     };
 
 
