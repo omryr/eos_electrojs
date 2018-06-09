@@ -1,13 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "liquideos-vote",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "liquideos-vote",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . voter --platform=windows --all --overwrite"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
     "quick",
