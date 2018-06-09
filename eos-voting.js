@@ -131,6 +131,7 @@ var eosVoter = class {
         voter.eosPublic.getKeyAccounts({ "public_key": Eos.modules.ecc.privateToPublic(privateKeyString) }).then(identity => {
             console.log('identity!!!!', identity.account_names[0])
             // accName = identity.account_names[0];
+            document.getElementById("cleos_name").innerHTML = identity.account_names[0];
             document.getElementById("cleos_account2").innerHTML = identity.account_names[0];
         });
 
