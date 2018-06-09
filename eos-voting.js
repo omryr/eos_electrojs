@@ -15,7 +15,7 @@ const networks = [
         port: 8888
     }
 ];
-var defaultIndex = 0;
+var defaultIndex = 1;
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
