@@ -28,26 +28,6 @@ if (networkParam)
     defaultIndex = networkParam;
 const network = networks[defaultIndex];
 
-
-// var privateKey = "";
-
-// var transactionConfig = {
-//     chainId: null, // 32 byte (64 char) hex string          
-//     expireInSeconds: 60,
-//     broadcast: true,
-//     debug: true, // API and transactions
-//     sign: true,
-//     keyProvider: privateKey
-//     //   keyProvider: '5KUmsEfv4Ww3cXF7JLZQvpiGNURJmYdH6ccukojhfmNMwuFU8bo'
-// };
-// if (network.secured) {
-//     transactionConfig.httpsEndpoint = 'https://' + network.host + ':' + network.port;
-// }
-// else {
-//     transactionConfig.httpEndpoint = 'http://' + network.host + ':' + network.port;
-// }
-// this.eosPrivate = new Eos.Testnet(transactionConfig);
-
 var eosVoter = class {
     constructor() {
         this.network = {
